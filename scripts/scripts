@@ -1,1 +1,0 @@
-bind-key -r f run-shell "tmux neww ~/.config/zsh/bin/tmux-sessionizer.sh"
