@@ -3,6 +3,7 @@ require "nvchad.lsp"
 
 local M = {}
 local utils = require "core.utils"
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- export on_attach & capabilities for custom lspconfigs
 
@@ -41,6 +42,73 @@ M.capabilities.textDocument.completion.completionItem = {
   },
 }
 
+require("lspconfig").intelephense.setup({})
+--
+-- require('lspconfig').vuels.setup({
+--     cmd = { "vls"},
+--     filetypes = { "vue" },
+--     init_options = {
+--       config = {
+--         css = {},
+--         emmet = {},
+--         html = {
+--           suggest = {}
+--         },
+--         javascript = {
+--           format = {}
+--         },
+--         stylusSupremacy = {},
+--         typescript = {
+--           format = {}
+--         },
+--         vetur = {
+--           completion = {
+--             autoImport = false,
+--             tagCasing = "kebab",
+--             useScaffoldSnippets = false
+--           },
+--           format = {
+--             defaultFormatter = {
+--               js = "none",
+--               ts = "none"
+--             },
+--             defaultFormatterOptions = {},
+--             scriptInitialIndent = false,
+--             styleInitialIndent = false
+--           },
+--           useWorkspaceDependencies = false,
+--           validation = {
+--             script = true,
+--             style = true,
+--             template = true
+--           }
+--         }
+--       }
+--     }
+-- })
+-- Setup for vue typescript projects
+require('lspconfig').volar.setup({
+  on_attach = function(client, bufnr)
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
+    -- if client.server_capabilities.inlayHintProvider then
+    --   vim.lsp.buf.inlay_hint(bufnr, true)
+    -- end
+  end,
+    init_options = {
+        typescript = {
+            tsdk = '/Users/jamiekozminska/.volta/tools/shared/typescript/lib'
+        }
+    },
+  capabilities = capabilities,
+  -- Enable "Take Over Mode" where volar will provide all JS/TS LSP services
+  -- This drastically improves the responsiveness of diagnostic updates on change
+  filetypes = { 'javascript', 'vue' },
+})
+
+-- Tailwind CSS
+require('lspconfig').tailwindcss.setup({ capabilities = capabilities })
+
 require("lspconfig").lua_ls.setup {
   on_attach = M.on_attach,
   capabilities = M.capabilities,
@@ -63,5 +131,15 @@ require("lspconfig").lua_ls.setup {
     },
   },
 }
+
+vim.keymap.set('n', '<Leader>d', '<cmd>lua vim.diagnostics.open_float()<CR>')
+vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostics.goto_prev()<CR>')
+vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostics.goto_next()<CR>')
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
+vim.keymap.set('n', 'gi', ':Telescope lsp_implementations<CR>')
+vim.keymap.set('n', 'gr', ':Telescope lsp_references<CR>')
+vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
+vim.keymap.set('n', '<Leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
+
 
 return M

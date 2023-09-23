@@ -35,5 +35,7 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 export KEYTIMEOUT=1
 export TERM=xterm-256color
+export VOLTA_HOME="$HOME/.volta/"
+export PATH="$VOLTA_HOME/bin:$PATH"
 
 eval "$(starship init zsh)"

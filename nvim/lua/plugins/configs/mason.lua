@@ -1,5 +1,6 @@
 local options = {
   ensure_installed = { "lua-language-server" }, -- not an option from mason.nvim
+    automatic_installation = true,
 
   PATH = "skip",
 

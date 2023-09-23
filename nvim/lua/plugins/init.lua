@@ -137,11 +137,21 @@ local default_plugins = {
 
   {
     "neovim/nvim-lspconfig",
+    dependencies = {
+        "jose-elias-alvarez/null-ls.nvim"
+    },
     init = function()
       require("core.utils").lazy_load "nvim-lspconfig"
     end,
     config = function()
       require "plugins.configs.lspconfig"
+    end,
+  },
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    config = function ()
+        require "custom.configs.null-ls"
+        -- require 'plugins.configs.null-ls'
     end,
   },
 
@@ -176,6 +186,7 @@ local default_plugins = {
         end,
       },
 
+
       -- cmp sources plugins
       {
         "saadparwaiz1/cmp_luasnip",
@@ -192,7 +203,10 @@ local default_plugins = {
       require("cmp").setup(opts)
     end,
   },
-
+  {
+    'tpope/vim-sleuth',
+    event = 'BufEnter'
+  },
   {
     "numToStr/Comment.nvim",
     keys = {
@@ -229,7 +243,11 @@ local default_plugins = {
 
   {
     "nvim-telescope/telescope.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter", { "nvim-telescope/telescope-fzf-native.nvim", build = "make" } },
+    dependencies = { "nvim-treesitter/nvim-treesitter",
+            { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+            'JoosepAlviste/nvim-ts-context-commentstring',
+            'nvim-treesitter/nvim-treesitter-textobjects',
+        },
     cmd = "Telescope",
     init = function()
       require("core.utils").load_mappings "telescope"
