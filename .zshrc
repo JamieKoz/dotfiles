@@ -37,5 +37,6 @@ export KEYTIMEOUT=1
 export TERM=xterm-256color
 export VOLTA_HOME="$HOME/.volta/"
 export PATH="$VOLTA_HOME/bin:$PATH"
+[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
 
 eval "$(starship init zsh)"
