@@ -1,4 +1,4 @@
-local colorscheme = 'catppuccin'
+local colorscheme = 'tokyonight-moon'
 
 return {
   {
@@ -15,9 +15,7 @@ return {
     priority = 1000,
     config = function()
       local cat = require 'catppuccin'
-      cat.setup {
-        transparent_background = true,
-      }
+      cat.setup {}
 
       vim.cmd.colorscheme(colorscheme)
     end,
@@ -28,5 +26,11 @@ return {
     config = function()
       vim.cmd.colorscheme(colorscheme)
     end,
+  },
+  {
+    'folke/tokyonight.nvim',
+    lazy = false,
+    priority = 1000,
+    opts = {},
   },
 }
