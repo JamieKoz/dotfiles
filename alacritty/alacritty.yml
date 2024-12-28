@@ -170,6 +170,11 @@ font:
 
   # Point size
   size: 12.0
+  features:
+    - name: liga
+      value: true
+    - name: clig
+      value: true
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter

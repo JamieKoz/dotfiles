@@ -38,7 +38,6 @@ return {
         'c_sharp',
         'markdown',
         'markdown_inline',
-        'dockerfile',
         'gitignore',
       },
       auto_install = true,

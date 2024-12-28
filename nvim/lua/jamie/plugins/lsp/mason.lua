@@ -15,8 +15,6 @@ return {
   },
   build = ':MasonUpdate',
   config = function(_, opts)
-    pcall(require, 'mason-nvim-dap')
-
     local mason = require 'mason'
     local mason_lspconfig = require 'mason-lspconfig'
 
@@ -36,13 +34,12 @@ return {
       ensure_installed = {
         'jsonls',
         'rust_analyzer',
-        'tsserver',
         'html',
         'omnisharp',
         'lua_ls',
         'cssls',
         'emmet_ls',
-        'pylsp',
+        -- 'pylsp',
         'pyright',
         'intelephense',
       },
@@ -53,9 +50,9 @@ return {
       ensure_installed = {
         'prettier', -- prettier formatter
         'stylua', -- lua formatter
-        'isort', -- python formatter
-        'black', -- python formatter
-        'pylint', -- python linter
+        -- 'isort', -- python formatter
+        -- 'black', -- python formatter
+        -- 'pylint', -- python linter
         'eslint_d', -- js linter
       },
     }

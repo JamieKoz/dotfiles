@@ -1,38 +1,55 @@
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
     vim.highlight.on_yank()
   end,
-  group = highlight_group,
+  group = vim.api.nvim_create_augroup('YankHighlight', { clear = true }),
   pattern = '*',
 })
 
--- Define a Lua function to remove the items from the quickfix list
-function remove_qf_items(start_line, end_line)
-  -- Get all items in the quickfix list
-  local qfall = vim.fn.getqflist()
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('LspKeymaps', { clear = true }),
+  callback = function(ev)
+    local opts = { noremap = true, silent = true, buffer = ev.buf }
 
-  -- Remove the items from the quickfix list
-  -- Loop backwards to preserve the indices of the items to be removed
-  for i = end_line, start_line, -1 do
-    table.remove(qfall, i)
-  end
+    -- Setup keymaps for when when an LSP attaches to the buffer.
+    opts.desc = '[L]SP: [R]ename'
+    vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, opts)
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
 
-  -- Replace the quickfix list with the updated list
-  vim.fn.setqflist(qfall, 'r')
+    opts.desc = '[L]SP: Code [A]ction'
+    vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
 
-  -- Reopen the quickfix window
-  vim.cmd('copen')
-end
+    opts.desc = 'LSP: [G]oto [D]efinition'
+    vim.keymap.set('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts)
 
--- Create commands to call the Lua function
-vim.cmd('command! RemoveQFItem lua remove_qf_items(vim.fn.line("."), vim.fn.line("."))')
-vim.cmd('command! -range RemoveQFItems lua remove_qf_items(vim.fn.line("\'<"), vim.fn.line("\'>"))')
+    opts.desc = 'LSP: [G]oto [R]eferences'
+    vim.keymap.set('n', 'gR', '<cmd>Telescope lsp_references<CR>', opts)
 
--- Set up an autocommand to map 'dd' to remove the quickfix item(s) when the
--- filetype is 'qf' (quickfix)
-vim.cmd('autocmd FileType qf nnoremap <buffer> dd :RemoveQFItem<CR>')
-vim.cmd('autocmd FileType qf xnoremap <buffer> dd :RemoveQFItems<CR>')
+    opts.desc = 'LSP: [G]oto [I]mplementation'
+    vim.keymap.set('n', 'gi', '<cmd>Telescope lsp_implementations<CR>', opts)
+
+    opts.desc = '[L]SP: [T]ype Definition'
+    vim.keymap.set('n', '<leader>lt', '<cmd>Telescope lsp_type_definitions<CR>', opts)
+
+    opts.desc = 'LSP: Hover Documentation'
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts) -- See `:help K` for why this keymap
+
+    opts.desc = 'Show buffer diagnostics'
+    vim.keymap.set('n', '<leader>D', '<cmd>Telescope diagnostics bufnr=0<CR>', opts) -- See `:help K` for why this keymap
+
+    opts.desc = '[L]SP: [S]ignature Documentation'
+    vim.keymap.set('n', '<leader>ls', vim.lsp.buf.signature_help, opts)
+
+    opts.desc = 'LSP: [G]oto [D]eclaration'
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+
+    opts.desc = 'Open floating diagnostic message'
+    vim.keymap.set('n', 'gh', vim.diagnostic.open_float, opts)
+
+    opts.desc = '[L]SP: List [D]iagnostics'
+    vim.keymap.set('n', '<leader>ld', vim.diagnostic.setloclist, opts)
+  end,
+})

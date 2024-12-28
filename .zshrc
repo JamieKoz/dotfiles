@@ -32,7 +32,6 @@ zstyle ':completion:*' verbose true
 
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 export KEYTIMEOUT=1
 export TERM=xterm-256color
 setxkbmap -option caps:none
@@ -40,8 +39,12 @@ setxkbmap -option caps:none
 export VOLTA_HOME="$HOME/.volta/"
 export PATH=$PATH:/usr/local/bin
 export PATH="$VOLTA_HOME/bin:$PATH"
+bindkey '^R' history-incremental-search-backward
+
 [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
 
 eval "$(starship init zsh)"
 
 [ -f "/home/jamie/.ghcup/env" ] && source "/home/jamie/.ghcup/env" # ghcup-env
+export PATH=$HOME/.local/bin:$PATH
+

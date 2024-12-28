@@ -17,22 +17,16 @@ return {
         markdown = { 'prettier' },
         graphql = { 'prettier' },
         lua = { 'stylua' },
-        python = { 'isort', 'black' },
+        -- python = { 'isort', 'black' },
         terraform = { 'terraform_fmt' },
       },
-      format_on_save = {
-        -- lsp_fallback = true,
-        -- async = false,
-        -- timeout_ms = 1000,
-      },
+      -- format_on_save = {
+      -- lsp_fallback = true,
+      -- async = false,
+      -- timeout_ms = 1000,
+      -- },
     }
 
-    vim.keymap.set({ 'n', 'v' }, '<leader>lf', function()
-      conform.format {
-        lsp_fallback = true,
-        async = false,
-        timeout_ms = 1000,
-      }
-    end, { desc = '[L]SP: [F]ormat file or range (in visual mode)' })
+    vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
   end,
 }
