@@ -14,6 +14,24 @@ ln -s $DOTFILES/.zshrc $HOME/.zshrc
 rm -rf $HOME/.tmux.conf
 ln -s $DOTFILES/.tmux.conf $HOME/.tmux.conf
 
+rm -rf $HOME/.local/share/omarchy/default/hypr/
+ln -s $DOTFILES/hypr/omarchy $HOME/.local/share/omarchy/default/hypr/
+
+rm -rf $HOME/.config/hypr/
+ln -s $DOTFILES/hypr/hyprland $HOME/.config/hypr/
+
 rm -rf $HOME/.scripts
 ln -s $DOTFILES/scripts $HOME/.scripts
 
+# Install fzf if not already installed
+if ! command -v fzf >/dev/null 2>&1; then
+    echo "fzf not found, installing..."
+    
+    # For Arch Linux / Omarchy
+    sudo pacman -S --noconfirm fzf
+    
+    # If you prefer AUR version with extras, use yay:
+    # yay -S --noconfirm fzf
+else
+    echo "fzf is already installed, skipping..."
+fi
