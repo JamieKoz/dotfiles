@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find  /var/workspace/ ~/projects -mindepth 1 -maxdepth 1 -type d | fzf --prompt "﬿ ")
+    selected=$(find  ~/dotfiles ~/projects -mindepth 1 -maxdepth 1 -type d | fzf --prompt "﬿ ")
 fi
 
 if [[ -z $selected ]]; then
