@@ -121,6 +121,10 @@ return {
           },
         },
       }
+
+      lspconfig['omnisharp'].setup {
+
+      }
     end,
   },
 }

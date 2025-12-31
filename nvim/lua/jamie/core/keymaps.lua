@@ -65,7 +65,10 @@ vim.keymap.set('n', '<leader>co', function()
     vim.cmd('copen')
   end
 end, { desc = "Toggle the Quickfix list" })
-vim.keymap.set('n', '<leader>cn', "<cmd>cnext<CR>", { desc = "Go to next item in Quickfix List" })
+vim.keymap.set('n', '<A-j>', "<cmd>cnext<CR>", { desc = "Go to next item in Quickfix List" })
 vim.keymap.set('n', ']q', "<cmd>cnext<CR>", { desc = "Go to next item in Quickfix List" })
-vim.keymap.set('n', '<leader>cp', "<cmd>cprev<CR>", { desc = "Go to previous item in Quickfix List" })
+vim.keymap.set('n', '<A-k>', "<cmd>cprev<CR>", { desc = "Go to previous item in Quickfix List" })
 vim.keymap.set('n', '[q', "<cmd>cprev<CR>", { desc = "Go to previous item in Quickfix List" })
+
+vim.keymap.set('n', '<A-h>', "<cmd>colder<CR>", { desc = "Go to older Quickfix List" })
+vim.keymap.set('n', '<A-l>', "<cmd>cnewer<CR>", { desc = "Go to newer Quickfix List" })

@@ -1,0 +1,54 @@
+let mapleader = " "
+
+source ~/.vimrc
+
+nnoremap gh :action ShowErrorDescription<CR>
+nnoremap <C-w>d :action ShowErrorDescription<CR>
+nnoremap <leader>gI <Action>(GotoImplementation)
+nnoremap <leader>gt <Action>(GotoTest)
+map gc :action CommentByLineComment<CR>
+nnoremap <C-h> :action NextSplitter<CR>
+noremap <C-l> :action NextSplitter<CR>
+nnoremap <Leader><Leader> <C-6>
+nnoremap gra :action ShowIntentionActions<CR>
+" nnoremap <leader>e :action ActivateProjectToolWindow<CR>
+nnoremap grn :action RenameElement<CR>
+map <leader>e :NERDTreeToggle<CR>
+map <Leader>o :action ViewToolButtons<CR>
+map <Leader>d :action ActivateDebugToolWindow<CR>
+map <Leader>j :action HideActiveToolWindow<CR>
+map gS :action FindInPath<CR>
+map <leader>f <action>(GotoFile)
+map <A-j> <action>(ActivateFindToolWindow)
+map <A-k> <action>(ActivateFindToolWindow)
+map <C-w>r <action>(MoveEditorToOppositeTabGroup)
+
+map <leader>db <action>(RiderUnitTestDebugContextAction)
+map <leader>ds <action>(Stop)
+map <leader>tb <action>(ToggleLineBreakpoint)
+
+set showmode
+set showcmd
+set incsearch
+set notimeout
+set inccommand
+set relativenumber
+set number 
+
+" Plugins
+set breakindent
+set surround
+set NERDTree
+set highlightedyank
+set which-ke
+let g:WhichKey_FontSize = 16
+let g:WhichKey_CommandColor = "#41ead4"
+let g:WhichKey_PrefixColor = "#f335b2"
+let g:WhichKey_SortOrder = "by_key_prefix_first"
+
+nmap <C-w>\| <Action>(MaximizeEditorInSplit)
+nmap <C-w>= <Action>(MaximizeEditorInSplit)
+nmap <C-Down> <Action>(StretchSplitToBottom)
+nmap <C-Left> <Action>(StretchSplitToLeft)
+nmap <C-Right> <Action>(StretchSplitToRight)
+nmap <C-Up> <Action>(StretchSplitToTop)
