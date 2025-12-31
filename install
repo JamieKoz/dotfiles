@@ -2,23 +2,23 @@
 
 DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 
-rm -rf $HOME/.config/alacritty
-ln -s $DOTFILES/alacritty $HOME/.config/alacritty
-
-rm -rf $HOME/.config/nvim
-ln -s $DOTFILES/nvim $HOME/.config/nvim
-
-rm -rf $HOME/.zshrc
-ln -s $DOTFILES/.zshrc $HOME/.zshrc
-
+# rm -rf $HOME/.config/alacritty
+# ln -s $DOTFILES/alacritty $HOME/.config/alacritty
+#
+# rm -rf $HOME/.config/nvim
+# ln -s $DOTFILES/nvim $HOME/.config/nvim
+#
+# rm -rf $HOME/.zshrc
+# ln -s $DOTFILES/.zshrc $HOME/.zshrc
+#
 rm -rf $HOME/.tmux.conf
 ln -s $DOTFILES/.tmux.conf $HOME/.tmux.conf
 
-rm -rf $HOME/.local/share/omarchy/default/hypr/
-ln -s $DOTFILES/hypr/omarchy $HOME/.local/share/omarchy/default/hypr/
+rm -rf $HOME/.local/share/omarchy/default/hypr
+ln -s $DOTFILES/hypr/omarchy $HOME/.local/share/omarchy/default/hypr
 
-rm -rf $HOME/.config/hypr/
-ln -s $DOTFILES/hypr/hyprland $HOME/.config/hypr/
+rm -rf $HOME/.config/hypr
+ln -s $DOTFILES/hypr/hyprland $HOME/.config/hypr
 
 rm -rf $HOME/.scripts
 ln -s $DOTFILES/scripts $HOME/.scripts
